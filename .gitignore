@@ -1,0 +1,37 @@
+# Python Bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE files
+*.idea/
+*.vscode/
+*.swp
+*.swo
+
+# Dependency directories
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environment Variables
+.env
+
+# Python egg files
+*.egg-info/
+
+# MacOS files
+.DS_Store
+
+# Logs
+*.log
