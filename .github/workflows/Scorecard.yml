@@ -5,12 +5,13 @@ on:
       - main
 
 jobs:
-  build:
+  scorecard:
     runs-on: ubuntu-latest
     steps:
       - name: Run OpenSSF Scorecard
         uses: ossf/scorecard-action@v2.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           results_file: results.json
+
+      - name: Show results
+        run: cat results.json
