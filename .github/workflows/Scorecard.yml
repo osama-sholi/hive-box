@@ -12,6 +12,3 @@ jobs:
         uses: ossf/scorecard-action@v2.4.0
         with:
           results_file: results.json
-
-      - name: Show results
-        run: cat results.json
