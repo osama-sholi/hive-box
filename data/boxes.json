@@ -1,0 +1,577 @@
+[
+  {
+    "_id": "5d754c46953683001a37a1ce",
+    "createdAt": "2022-03-30T11:25:43.763Z",
+    "updatedAt": "2024-10-21T07:44:32.737Z",
+    "name": "B13",
+    "currentLocation": {
+      "timestamp": "2019-09-08T18:45:26.684Z",
+      "coordinates": [8.822279, 53.076957],
+      "type": "Point"
+    },
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "title": "PM10",
+        "unit": "µg/m³",
+        "sensorType": "SDS 011",
+        "icon": "osem-cloud",
+        "_id": "5d754c46953683001a37a1d3",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "19.48"
+        }
+      },
+      {
+        "title": "PM2.5",
+        "unit": "µg/m³",
+        "sensorType": "SDS 011",
+        "icon": "osem-cloud",
+        "_id": "5d754c46953683001a37a1d2",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "6.53"
+        }
+      },
+      {
+        "title": "Temperatur",
+        "unit": "°C",
+        "sensorType": "BME280",
+        "icon": "osem-thermometer",
+        "_id": "5d754c46953683001a37a1d1",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "15.77"
+        }
+      },
+      {
+        "title": "rel. Luftfeuchte",
+        "unit": "%",
+        "sensorType": "BME280",
+        "icon": "osem-humidity",
+        "_id": "5d754c46953683001a37a1d0",
+        "lastMeasurement": {
+          "value": "100.00",
+          "createdAt": "2024-10-21T07:44:32.723Z"
+        }
+      },
+      {
+        "title": "Luftdruck",
+        "unit": "Pa",
+        "sensorType": "BME280",
+        "icon": "osem-barometer",
+        "_id": "5d754c46953683001a37a1cf",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "102208.88"
+        }
+      },
+      {
+        "_id": "666620e85a5e5e0007c0b86d",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "DHT22",
+        "icon": "osem-temperature-celsius",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "16.20"
+        }
+      },
+      {
+        "_id": "6666215c5a5e5e0007c17f4f",
+        "title": "humidity",
+        "unit": "%",
+        "sensorType": "DHT22",
+        "icon": "osem-barometer",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:32.723Z",
+          "value": "99.90"
+        }
+      }
+    ],
+    "model": "luftdaten_sds011_bme280",
+    "lastMeasurementAt": "2024-10-21T07:44:32.723Z",
+    "grouptag": [""],
+    "loc": [
+      {
+        "geometry": {
+          "timestamp": "2019-09-08T18:45:26.684Z",
+          "coordinates": [8.822279, 53.076957],
+          "type": "Point"
+        },
+        "type": "Feature"
+      }
+    ]
+  },
+  {
+    "_id": "61a1183bd85cc7001bf3640e",
+    "createdAt": "2022-03-30T11:25:43.960Z",
+    "updatedAt": "2024-10-21T07:43:06.378Z",
+    "name": "ELSYS_EMS_PERRET_SEE",
+    "currentLocation": {
+      "timestamp": "2021-11-26T17:24:11.033Z",
+      "coordinates": [5.735443, 45.184895],
+      "type": "Point"
+    },
+    "grouptag": ["elsys ems"],
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "icon": "osem-temperature-celsius",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "NA",
+        "_id": "61a1183bd85cc7001bf36410",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:04.407Z",
+          "value": "16.3"
+        }
+      },
+      {
+        "icon": "osem-humidity",
+        "title": "humidity",
+        "unit": "%",
+        "sensorType": "NA",
+        "_id": "61a1183bd85cc7001bf3640f",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:04.407Z",
+          "value": "89"
+        }
+      },
+      {
+        "_id": "61a1d385d85cc7001b477be9",
+        "icon": "osem-shock",
+        "sensorType": "accelerometer",
+        "unit": "unit",
+        "title": "motion",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:06.365Z",
+          "value": "1"
+        }
+      },
+      {
+        "_id": "61a1d385d85cc7001b477bea",
+        "icon": "osem-battery",
+        "sensorType": "NA",
+        "unit": "mV",
+        "title": "battery",
+        "lastMeasurement": {
+          "value": "3610",
+          "createdAt": "2024-10-21T07:43:04.407Z"
+        }
+      },
+      {
+        "_id": "61a227e94a7833001b419fe4",
+        "icon": "osem-not-available",
+        "sensorType": "NA",
+        "unit": "unit",
+        "title": "fCnt",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:06.365Z",
+          "value": "140973"
+        }
+      }
+    ],
+    "model": "custom",
+    "image": "61a1183bd85cc7001bf3640e_r37xif.jpg",
+    "lastMeasurementAt": "2024-10-21T07:43:06.365Z",
+    "loc": [
+      {
+        "geometry": {
+          "timestamp": "2021-11-26T17:24:11.033Z",
+          "coordinates": [5.735443, 45.184895],
+          "type": "Point"
+        },
+        "type": "Feature"
+      }
+    ]
+  },
+  {
+    "_id": "61aa63758479bf001b822620",
+    "createdAt": "2021-12-03T18:35:33.939Z",
+    "updatedAt": "2024-10-21T07:43:54.659Z",
+    "name": "Seth-Bgm",
+    "currentLocation": {
+      "timestamp": "2021-12-03T18:35:33.934Z",
+      "coordinates": [10.174549, 53.843819],
+      "type": "Point"
+    },
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "icon": "osem-thermometer",
+        "title": "Temperature",
+        "unit": "°C",
+        "sensorType": "SHT3x",
+        "_id": "61aa63758479bf001b822626",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:54.654Z",
+          "value": "22.75"
+        }
+      },
+      {
+        "icon": "osem-humidity",
+        "title": "Relative humidity",
+        "unit": "%",
+        "sensorType": "SHT3x",
+        "_id": "61aa63758479bf001b822625"
+      },
+      {
+        "icon": "osem-thermometer",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "BMPx80",
+        "_id": "61aa63758479bf001b822624",
+        "lastMeasurement": {
+          "value": "15.60",
+          "createdAt": "2024-10-21T07:43:54.654Z"
+        }
+      },
+      {
+        "icon": "osem-barometer",
+        "title": "air pressure",
+        "unit": "hPa",
+        "sensorType": "BMPx80",
+        "_id": "61aa63758479bf001b822623"
+      },
+      {
+        "icon": "osem-fire",
+        "title": "PM2.5",
+        "unit": "µg/m",
+        "sensorType": "SDS011",
+        "_id": "61aa63758479bf001b822622",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:54.654Z",
+          "value": "0.93"
+        }
+      },
+      {
+        "icon": "osem-fire",
+        "title": "PM10",
+        "unit": "µg/m",
+        "sensorType": "SDS011",
+        "_id": "61aa63758479bf001b822621",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:43:54.654Z",
+          "value": "6.22"
+        }
+      }
+    ],
+    "model": "custom",
+    "lastMeasurementAt": "2024-10-21T07:43:54.654Z",
+    "loc": [
+      {
+        "geometry": {
+          "timestamp": "2021-12-03T18:35:33.934Z",
+          "coordinates": [10.174549, 53.843819],
+          "type": "Point"
+        },
+        "type": "Feature"
+      }
+    ]
+  },
+  {
+    "_id": "6251b7ead7e732001b3a3315",
+    "createdAt": "2022-04-09T16:44:26.298Z",
+    "updatedAt": "2024-10-21T07:36:35.863Z",
+    "name": "andutan's wonder weather station",
+    "currentLocation": {
+      "timestamp": "2022-04-09T16:44:26.294Z",
+      "coordinates": [8.25333, 50.003549, 12],
+      "type": "Point"
+    },
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "icon": "osem-thermometer",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "DHT22/BMP180",
+        "_id": "6251b7ead7e732001b3a331b",
+        "lastMeasurement": {
+          "value": "20.45",
+          "createdAt": "2024-10-21T07:36:35.853Z"
+        }
+      },
+      {
+        "icon": "osem-humidity",
+        "title": "rel. humidity",
+        "unit": "%",
+        "sensorType": "DHT22",
+        "_id": "6251b7ead7e732001b3a331a",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:36:35.853Z",
+          "value": "82.2"
+        }
+      },
+      {
+        "icon": "osem-barometer",
+        "title": "barometric pressure",
+        "unit": "hPa",
+        "sensorType": "BMP180",
+        "_id": "6251b7ead7e732001b3a3319",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:36:35.853Z",
+          "value": "1013.1080000000001"
+        }
+      },
+      {
+        "icon": "osem-cloud",
+        "title": "fine particle matter PM2.5",
+        "unit": "µg/m³",
+        "sensorType": "SDS011",
+        "_id": "6251b7ead7e732001b3a3318",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:36:35.853Z",
+          "value": "7.5"
+        }
+      },
+      {
+        "icon": "osem-cloud",
+        "title": "fine particle matter PM10.0",
+        "unit": "µg/m³",
+        "sensorType": "SDS011",
+        "_id": "6251b7ead7e732001b3a3317",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:36:35.853Z",
+          "value": "10"
+        }
+      },
+      {
+        "icon": "osem-radioactive",
+        "title": "radioactivety",
+        "unit": "µS/h",
+        "sensorType": "MIGHTY OHM GEIGER COUNTER",
+        "_id": "6251b7ead7e732001b3a3316",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:36:35.853Z",
+          "value": "0.15"
+        }
+      }
+    ],
+    "model": "custom",
+    "lastMeasurementAt": "2024-10-21T07:36:35.853Z",
+    "image": "6251b7ead7e732001b3a3315_ra3eqq.png",
+    "loc": [
+      {
+        "geometry": {
+          "timestamp": "2022-04-09T16:44:26.294Z",
+          "coordinates": [8.25333, 50.003549, 12],
+          "type": "Point"
+        },
+        "type": "Feature"
+      }
+    ]
+  },
+  {
+    "_id": "6547763643923100072a60eb",
+    "grouptag": [],
+    "model": "custom",
+    "name": "nam-voortuin",
+    "currentLocation": {
+      "type": "Point",
+      "coordinates": [6.056511, 52.48049, 2.5],
+      "timestamp": "2023-11-05T11:02:14.093Z"
+    },
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "_id": "6547763643923100072a60ec",
+        "icon": "osem-thermometer",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "SHT31"
+      },
+      {
+        "_id": "6547763643923100072a60ed",
+        "icon": "osem-barometer",
+        "title": "air pressure",
+        "unit": "hPa",
+        "sensorType": "BMP180"
+      },
+      {
+        "_id": "6547763643923100072a60ee",
+        "icon": "osem-moisture",
+        "title": "PM2.5",
+        "unit": "µg/m³",
+        "sensorType": "SDS011",
+        "lastMeasurement": {
+          "value": "2.40",
+          "createdAt": "2024-10-21T07:44:05.599Z"
+        }
+      },
+      {
+        "_id": "6547763643923100072a60ef",
+        "icon": "osem-moisture",
+        "title": "PM10",
+        "unit": "µg/m³",
+        "sensorType": "SDS011",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:05.599Z",
+          "value": "10.10"
+        }
+      },
+      {
+        "_id": "6547763643923100072a60f0",
+        "icon": "osem-windspeed",
+        "title": "humidity",
+        "unit": "%",
+        "sensorType": "HECA",
+        "lastMeasurement": {
+          "createdAt": "2023-12-09T00:19:31.021Z",
+          "value": "60.38"
+        }
+      }
+    ],
+    "updatedAt": "2024-10-21T07:44:05.605Z",
+    "createdAt": "2023-11-05T11:02:14.098Z",
+    "lastMeasurementAt": "2024-10-21T07:44:05.599Z",
+    "loc": [
+      {
+        "geometry": {
+          "type": "Point",
+          "coordinates": [6.056511, 52.48049, 2.5],
+          "timestamp": "2023-11-05T11:02:14.093Z"
+        },
+        "type": "Feature"
+      }
+    ]
+  },
+  {
+    "_id": "65d39162578b6f0008845a7d",
+    "grouptag": [],
+    "model": "custom",
+    "name": "Mester",
+    "currentLocation": {
+      "type": "Point",
+      "coordinates": [18.961928, 47.56467],
+      "timestamp": "2024-02-19T17:35:30.579Z"
+    },
+    "exposure": "outdoor",
+    "sensors": [
+      {
+        "_id": "65d39162578b6f0008845a7e",
+        "icon": "osem-cloud",
+        "title": "PM1.0",
+        "unit": "µg/m3",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "14.48"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a7f",
+        "icon": "osem-cloud",
+        "title": "PM2.5",
+        "unit": "µg/m3",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "15.72"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a80",
+        "icon": "osem-cloud",
+        "title": "PM4.0",
+        "unit": "µg/m3",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "16.13"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a81",
+        "icon": "osem-cloud",
+        "title": "PM10",
+        "unit": "µg/m3",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "16.33"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a82",
+        "icon": "osem-cloud",
+        "title": "NOx index",
+        "unit": "ppm",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "10.33"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a83",
+        "icon": "osem-cloud",
+        "title": "VOC index",
+        "unit": "ppm",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "115.67"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a84",
+        "icon": "osem-humidity",
+        "title": "realtive humidity",
+        "unit": "%",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "value": "67.53",
+          "createdAt": "2024-10-21T07:44:17.036Z"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a85",
+        "icon": "osem-barometer",
+        "title": "pressure",
+        "unit": "Pa",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "100399.66"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a86",
+        "icon": "osem-thermometer",
+        "title": "temperature",
+        "unit": "°C",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "10.71"
+        }
+      },
+      {
+        "_id": "65d39162578b6f0008845a87",
+        "icon": "osem-battery",
+        "title": "power supply",
+        "unit": "V",
+        "sensorType": "iotroniq",
+        "lastMeasurement": {
+          "createdAt": "2024-10-21T07:44:17.036Z",
+          "value": "4.82"
+        }
+      }
+    ],
+    "updatedAt": "2024-10-21T07:44:17.045Z",
+    "createdAt": "2024-02-19T17:35:30.586Z",
+    "lastMeasurementAt": "2024-10-21T07:44:17.036Z",
+    "loc": [
+      {
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.961928, 47.56467],
+          "timestamp": "2024-02-19T17:35:30.579Z"
+        },
+        "type": "Feature"
+      }
+    ]
+  }
+]
