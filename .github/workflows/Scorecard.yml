@@ -1,0 +1,16 @@
+name: Hive Box Scorecard
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run OpenSSF Scorecard
+        uses: ossf/scorecard-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          results_file: results.json
