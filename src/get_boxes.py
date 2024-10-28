@@ -1,11 +1,13 @@
 import requests
+import os
+from dotenv import load_dotenv
 from src.get_proper_date import rfc3339_date
 
 def get_boxes():
     """
     Get all boxes from the openSenseMap API
     """
-    url = 'https://api.opensensemap.org/boxes'
+    url = os.getenv('SENSEBOX_API_URL')
     params = {
         'date': rfc3339_date,
         'phenomenon': 'temperature',

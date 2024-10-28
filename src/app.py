@@ -1,9 +1,21 @@
-from flask import Flask, jsonify
+"""
+This module contains the API endpoints and metrics for the application.
+"""
+import time
+from flask import Flask, jsonify, request 
+from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
 from src.get_boxes import get_boxes
 from src.get_temp_avg import get_temp_avg
 from __version__ import VERSION
 
 app = Flask(__name__)
+
+# Create a registry to hold metrics
+registry = CollectorRegistry()
+
+# Define metrics
+REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'], registry=registry)
+REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request latencies', ['method', 'endpoint'], registry=registry)
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
@@ -13,7 +25,7 @@ def get_version():
     """
     return jsonify({"version": VERSION})
 
-# Avarage temperature endpoint
+# Average temperature endpoint
 @app.route('/api/temperature', methods=['GET'])
 def get_temperature():
     """
@@ -26,9 +38,38 @@ def get_temperature():
         if temp_avg is None:
             return jsonify({"error": "Unable to get temperature"}), 500
         else:
-            return jsonify({"temperature": temp_avg})  
+            # Determine the status based on the average temperature
+            if temp_avg < 10:
+                status = "Too Cold"
+            elif 11 <= temp_avg <= 36:
+                status = "Good"
+            else:
+                status = "Too Hot"
+
+            return jsonify({"temperature": temp_avg, "status": status})
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
+
+# Metrics endpoint
+@app.route('/api/metrics', methods=['GET'])
+def get_metrics():
+    """
+    Return the metrics of the API
+    """
+    # Record the request
+    REQUEST_COUNT.labels(method='GET', endpoint='/metrics').inc()
+    return generate_latest(registry), 200, {'Content-Type': 'text/plain; version=0.0.4; charset=utf-8'}
+
+# Middleware to track request latency
+@app.before_request
+def start_timer():
+    app.start_time = time.time()
+
+@app.after_request
+def record_request(response):
+    latency = time.time() - app.start_time
+    REQUEST_LATENCY.labels(method=request.method, endpoint=request.path).observe(latency)
+    return response
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
