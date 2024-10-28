@@ -7,6 +7,7 @@ def get_boxes():
     """
     Get all boxes from the openSenseMap API
     """
+    load_dotenv()
     url = os.getenv('SENSEBOX_API_URL')
     params = {
         'date': rfc3339_date,
