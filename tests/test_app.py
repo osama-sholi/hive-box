@@ -21,3 +21,7 @@ class TestApp(unittest.TestCase):
     def test_get_temperature(self):
         response = self.app.get('/api/temperature')
         self.assertEqual(response.status_code, 200)
+
+    def test_metrics(self):
+        response = self.app.get('/api/metrics')
+        self.assertEqual(response.status_code, 200)
