@@ -1,0 +1,18 @@
+name: Linters
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+jobs:
+  linting_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Lint Python code
+        uses: cclauss/GitHub-Action-for-pylint@0.7.0
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0

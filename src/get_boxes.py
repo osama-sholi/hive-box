@@ -1,5 +1,8 @@
-import requests
+"""
+Get all boxes from openSenseMap API for temperature phenomenon after a specific date.
+"""
 import os
+import requests
 from dotenv import load_dotenv
 from src.get_proper_date import rfc3339_date
 
@@ -14,7 +17,7 @@ def get_boxes():
         'phenomenon': 'temperature',
     }
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params, timeout=60)
 
     if response.status_code == 200:
         boxes = response.json()
