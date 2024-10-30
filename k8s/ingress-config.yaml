@@ -2,17 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hive-box-ingress
+  namespace: default
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: hive-box.local
+    - host: localhost
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: service
+                name: hive-box-service
                 port:
                   number: 5000

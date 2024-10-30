@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hive-box-app
+  labels:
+    app: hive-box
+spec:
+  containers:
+    - command:
+      image: ghcr.io/osama-sholi/hive-box/hive-box:main
+      name: hive-box-app
+      ports:
+        - containerPort: 5000
+      env:
+        - name: SENSEBOX_API_URL
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: SENSEBOX_API_URL

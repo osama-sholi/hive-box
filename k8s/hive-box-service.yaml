@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hive-box-service
+  labels:
+    app: hive-box
+spec:
+  selector:
+    app: hive-box
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 30000
+  type: NodePort
