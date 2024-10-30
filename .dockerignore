@@ -1,0 +1,35 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore test and log files
+*.log
+*.coverage
+*.pytest_cache
+.cache/
+
+# Ignore environment and sensitive files
+.env
+*.env
+
+# Ignore IDE and editor config files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore Docker files if not needed in production
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore any build or distribution files
+*.egg-info/
+dist/
+build/

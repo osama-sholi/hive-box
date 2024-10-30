@@ -6,10 +6,15 @@ on:
       - dev
 
 jobs:
-  scorecard:
+  scorecard_job:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Run OpenSSF Scorecard
         uses: ossf/scorecard-action@v2.4.0
         with:
           results_file: results.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,21 @@
+name: Terrascan
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  terrascan_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Terrascan
+        uses: tenable/terrascan-action@v1.4.1
+        with:
+          iac_type: terraform
+          iac_version: v14
+          policy_type: aws
+          only_warn: true

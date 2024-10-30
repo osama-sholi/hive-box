@@ -11,9 +11,9 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE files
+# IDE and editor files
 *.idea/
-*.vscode/
+.vscode/
 *.swp
 *.swo
 
@@ -21,11 +21,17 @@ venv.bak/
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Build and distribution directories
+dist/
+build/
+*.whl
+
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
 # Environment Variables
 .env
+.secrets
 
 # Python egg files
 *.egg-info/
@@ -35,3 +41,9 @@ pip-delete-this-directory.txt
 
 # Logs
 *.log
+
+# Testing files
+.coverage
+.pytest_cache/
+.tox/
+.mypy_cache/
