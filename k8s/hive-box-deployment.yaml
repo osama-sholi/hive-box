@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hive-box
-          image: ghcr.io/osama-sholi/hive-box/hive-box:main
+          image: ghcr.io/osama-sholi/hive-box/hive-box:latest
           ports:
             - containerPort: 5000
           env:
