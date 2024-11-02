@@ -2,12 +2,14 @@
 This module contains the API endpoints and metrics for the application.
 """
 import time
+import os
+import requests
 from flask import Flask, jsonify, request 
 from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
 from src.get_boxes import get_boxes
 from src.get_temp_avg import get_temp_avg
 from __version__ import VERSION
-
+from dotenv import load_dotenv
 app = Flask(__name__)
 
 # Create a registry to hold metrics
@@ -16,6 +18,15 @@ registry = CollectorRegistry()
 # Define metrics
 REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'], registry=registry)
 REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request latencies', ['method', 'endpoint'], registry=registry)
+
+# Valkey
+load_dotenv()
+valkey_host = os.getenv("VALKEY_HOST")
+valkey_port = os.getenv("VALKEY_PORT")
+
+response = requests.get(f"http://{valkey_host}:{valkey_port}/cache/my_data_key")
+
+print(response.json())
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
