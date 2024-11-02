@@ -25,6 +25,7 @@ REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request lat
 load_dotenv()
 host = os.getenv('VALKEY_HOST')
 port = int(os.getenv('VALKEY_PORT'))
+print(f"Valkey host: {host}, port: {port}")
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
