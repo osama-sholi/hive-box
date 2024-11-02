@@ -2,8 +2,15 @@ name: Continuous Delivery
 
 on:
   push:
+    branches:
+      - main
+      - dev
     tags:
       - "v1"
+  pull_request:
+    branches:
+      - main
+      - dev
 
 jobs:
   build:
