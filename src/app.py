@@ -24,8 +24,10 @@ load_dotenv()
 valkey_host = os.getenv("VALKEY_HOST")
 valkey_port = os.getenv("VALKEY_PORT")
 
-response = requests.get(f"http://{valkey_host}:{valkey_port}/cache/my_data_key")
+set_response = requests.put(f"http://{valkey_host}:{valkey_port}/cache/my_data_key", json={"value": "my_data_value"})
+print("Set response:", set_response.status_code)
 
+response = requests.get(f"http://{valkey_host}:{valkey_port}/cache/my_data_key")
 print(response.json())
 
 # Version endpoint
