@@ -1,6 +1,9 @@
 name: Continuous Delivery
 
-on: [push]
+on:
+  push:
+    tags:
+      - "v1"
 
 jobs:
   build:
@@ -22,4 +25,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/hive-box:${{ github.sha }}
+          tags: |
+            ghcr.io/${{ github.repository }}/hive-box:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/hive-box:latest
