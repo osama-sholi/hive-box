@@ -6,10 +6,10 @@ import os
 import valkey
 from flask import Flask, jsonify, request 
 from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
+from dotenv import load_dotenv
 from src.get_boxes import get_boxes
 from src.get_temp_avg import get_temp_avg
 from __version__ import VERSION
-from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -63,7 +63,7 @@ def get_temperature():
 
             # Add the output to the cache
             r.set("boxes", output)
-            return jsonify(output)
+            return jsonify({"output": output})
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
 
