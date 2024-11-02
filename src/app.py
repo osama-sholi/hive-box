@@ -4,6 +4,7 @@ This module contains the API endpoints and metrics for the application.
 import time
 import os
 import valkey
+import json
 from flask import Flask, jsonify, request 
 from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
 from dotenv import load_dotenv
@@ -20,6 +21,11 @@ registry = CollectorRegistry()
 REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'], registry=registry)
 REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request latencies', ['method', 'endpoint'], registry=registry)
 
+# Valkey configuration
+load_dotenv()
+host = os.getenv('VALKEY_HOST')
+port = int(os.getenv('VALKEY_PORT'))
+
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
 def get_version():
@@ -34,38 +40,45 @@ def get_temperature():
     """
     Return the average temperature of all boxes one hour ago
     """
-    load_dotenv()
-    host = os.getenv('VALKEY_HOST')
-    port = int(os.getenv('VALKEY_PORT'))
-    print(host,port)
-    r = valkey.Valkey(host=host,port=port, db=0,cache_ttl=300)
+    try:
+        # Initialize the Valkey connection
+        r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
 
-    # Check if the output is in the cache
-    if(r.get("boxes") is not None):
-        return r.get("boxes")
-    
-    boxes = get_boxes()
-    if boxes is not None:
-        temp_avg = get_temp_avg(boxes)
+        # Check if the output is in the cache
+        cached_output = r.get("boxes")
+        if cached_output is not None:
+            # Return cached output as JSON
+            return jsonify(json.loads(cached_output))
 
-        if temp_avg is None:
-            return jsonify({"error": "Unable to get temperature"}), 500
-        else:
-            # Determine the status based on the average temperature
-            if temp_avg < 10:
-                status = "Too Cold"
-            elif 11 <= temp_avg <= 36:
-                status = "Good"
+        # Retrieve and calculate temperature data if not cached
+        boxes = get_boxes()
+        if boxes is not None:
+            temp_avg = get_temp_avg(boxes)
+
+            if temp_avg is None:
+                return jsonify({"error": "Unable to get temperature"}), 500
             else:
-                status = "Too Hot"
+                # Determine the status based on the average temperature
+                if temp_avg < 10:
+                    status = "Too Cold"
+                elif 11 <= temp_avg <= 36:
+                    status = "Good"
+                else:
+                    status = "Too Hot"
 
-            output = f'The average temperature is {temp_avg}°C. Status: {status}'
+                output = {
+                    "average_temperature": temp_avg,
+                    "status": status
+                }
 
-            # Add the output to the cache
-            r.set("boxes", output)
-            return jsonify({"output": output})
-    else:
-        return jsonify({"error": "Unable to get temperature"}), 500
+                # Add the output to the cache as a JSON string
+                r.set("boxes", json.dumps(output))
+                return jsonify(output)
+        else:
+            return jsonify({"error": "Unable to get temperature"}), 500
+
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
 # Metrics endpoint
 @app.route('/api/metrics', methods=['GET'])
