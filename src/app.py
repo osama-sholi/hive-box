@@ -36,7 +36,7 @@ def get_temperature():
     """
     load_dotenv()
     host = os.getenv('VALKEY_HOST')
-    port = os.getenv('VALKEY_PORT')
+    port = int(os.getenv('VALKEY_PORT'))
     print(host,port)
     r = valkey.Valkey(host=host,port=port, db=0,cache_ttl=300)
 
