@@ -3,8 +3,8 @@ This module contains the API endpoints and metrics for the application.
 """
 import time
 import os
-import valkey
 import json
+import valkey
 from flask import Flask, jsonify, request 
 from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
 from dotenv import load_dotenv
@@ -41,45 +41,37 @@ def get_temperature():
     """
     Return the average temperature of all boxes one hour ago
     """
-    try:
-        # Initialize the Valkey connection
-        r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
+    # Initialize the Valkey connection
+    r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
 
-        # Check if the output is in the cache
-        cached_output = r.get("boxes")
-        if cached_output is not None:
-            # Return cached output as JSON
-            return jsonify(json.loads(cached_output))
+    # Check if the output is in the cache
+    cached_output = r.get("temperature")
+    if cached_output is not None:
+        # Return cached output as JSON
+        return jsonify(json.loads(cached_output))
 
-        # Retrieve and calculate temperature data if not cached
-        boxes = get_boxes()
-        if boxes is not None:
-            temp_avg = get_temp_avg(boxes)
+    # Retrieve and calculate temperature data if not cached
+    boxes = get_boxes()
+    if boxes is not None:
+        temp_avg = get_temp_avg(boxes)
 
-            if temp_avg is None:
-                return jsonify({"error": "Unable to get temperature"}), 500
-            else:
-                # Determine the status based on the average temperature
-                if temp_avg < 10:
-                    status = "Too Cold"
-                elif 11 <= temp_avg <= 36:
-                    status = "Good"
-                else:
-                    status = "Too Hot"
-
-                output = {
-                    "average_temperature": temp_avg,
-                    "status": status
-                }
-
-                # Add the output to the cache as a JSON string
-                r.set("boxes", json.dumps(output))
-                return jsonify(output)
-        else:
+        if temp_avg is None:
             return jsonify({"error": "Unable to get temperature"}), 500
+        else:
+            # Determine the status based on the average temperature
+            if temp_avg < 10:
+                status = "Too Cold"
+            elif 11 <= temp_avg <= 36:
+                status = "Good"
+            else:
+                status = "Too Hot"
 
-    except Exception as e:
-        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+            output = r'{"average_temperature": ' + str(temp_avg) + r', "status": "' + status + r'"}'
+            # Add the output to the cache as a JSON string
+            r.set("temperature", output)
+            return jsonify(json.loads(output))
+    else:
+        return jsonify({"error": "Unable to get temperature"}), 500
 
 # Metrics endpoint
 @app.route('/api/metrics', methods=['GET'])
