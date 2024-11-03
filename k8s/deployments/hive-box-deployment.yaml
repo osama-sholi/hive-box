@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hive-box
+  labels:
+    app: hive-box
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hive-box
+  template:
+    metadata:
+      labels:
+        app: hive-box
+    spec:
+      containers:
+        - name: hive-box
+          image: ghcr.io/osama-sholi/hive-box/hive-box:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SENSEBOX_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: SENSEBOX_API_URL
+            - name: VALKEY_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: VALKEY_HOST
+            - name: VALKEY_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: VALKEY_PORT
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hive-box-service
+  labels:
+    app: hive-box
+spec:
+  selector:
+    app: hive-box
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 30000
+  type: NodePort

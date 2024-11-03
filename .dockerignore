@@ -13,10 +13,12 @@ env/
 *.coverage
 *.pytest_cache
 .cache/
+*.pyc
 
 # Ignore environment and sensitive files
 .env
 *.env
+.secrets
 
 # Ignore IDE and editor config files
 .vscode/
@@ -33,3 +35,6 @@ docker-compose.yml
 *.egg-info/
 dist/
 build/
+
+# Ignore the k8s directory
+k8s/

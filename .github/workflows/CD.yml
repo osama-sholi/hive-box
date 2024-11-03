@@ -1,10 +1,16 @@
 name: Continuous Delivery
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
+      - dev
+    tags:
+      - "v1"
+  pull_request:
+    branches:
+      - main
+      - dev
 
 jobs:
   build:
@@ -26,4 +32,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/hive-box:${{ github.ref_name }}
+          tags: |
+            ghcr.io/${{ github.repository }}/hive-box:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/hive-box:latest
