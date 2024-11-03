@@ -4,7 +4,7 @@ This module contains the API endpoints and metrics for the application.
 import time
 import os
 import json
-import valkey
+# import valkey
 from flask import Flask, jsonify, request 
 from prometheus_client import CollectorRegistry, generate_latest, Counter, Histogram
 from dotenv import load_dotenv
@@ -21,11 +21,11 @@ registry = CollectorRegistry()
 REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'], registry=registry)
 REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request latencies', ['method', 'endpoint'], registry=registry)
 
-# Valkey configuration
-load_dotenv()
-host = os.getenv('VALKEY_HOST')
-port = int(os.getenv('VALKEY_PORT'))
-print(f"Valkey host: {host}, port: {port}")
+# # Valkey configuration
+# load_dotenv()
+# host = os.getenv('VALKEY_HOST')
+# port = int(os.getenv('VALKEY_PORT'))
+# print(f"Valkey host: {host}, port: {port}")
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
@@ -42,13 +42,13 @@ def get_temperature():
     Return the average temperature of all boxes one hour ago
     """
     # Initialize the Valkey connection
-    r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
+    # r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
 
     # Check if the output is in the cache
-    cached_output = r.get("temperature")
-    if cached_output is not None:
-        # Return cached output as JSON
-        return jsonify(json.loads(cached_output))
+    # cached_output = r.get("temperature")
+    # if cached_output is not None:
+    #     # Return cached output as JSON
+    #     return jsonify(json.loads(cached_output))
 
     # Retrieve and calculate temperature data if not cached
     boxes = get_boxes()
@@ -68,7 +68,7 @@ def get_temperature():
 
             output = r'{"average_temperature": ' + str(temp_avg) + r', "status": "' + status + r'"}'
             # Add the output to the cache as a JSON string
-            r.set("temperature", output)
+            # r.set("temperature", output)
             return jsonify(json.loads(output))
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
