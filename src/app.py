@@ -25,7 +25,7 @@ REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request lat
 load_dotenv()
 host = os.getenv('VALKEY_HOST')
 port = int(os.getenv('VALKEY_PORT'))
-print(f"Valkey host: {host}, port: {port}")
+valk = valkey.Valkey(host=host, port=port, db=0)
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
@@ -41,11 +41,8 @@ def get_temperature():
     """
     Return the average temperature of all boxes one hour ago
     """
-    # Initialize the Valkey connection
-    r = valkey.Valkey(host=host, port=port, db=0, cache_ttl=300)
-
     # Check if the output is in the cache
-    cached_output = r.get("temperature")
+    cached_output = valk.get("temperature")
     if cached_output is not None:
         # Return cached output as JSON
         return jsonify(json.loads(cached_output))
@@ -68,7 +65,7 @@ def get_temperature():
 
             output = r'{"average_temperature": ' + str(temp_avg) + r', "status": "' + status + r'"}'
             # Add the output to the cache as a JSON string
-            r.set("temperature", output)
+            valk.set("temperature", output, ex=300)
             return jsonify(json.loads(output))
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
@@ -82,6 +79,19 @@ def get_metrics():
     # Record the request
     REQUEST_COUNT.labels(method='GET', endpoint='/metrics').inc()
     return generate_latest(registry), 200, {'Content-Type': 'text/plain; version=0.0.4; charset=utf-8'}
+
+# readyz endpoint
+@app.route('/api/readyz', methods=['GET'])
+def get_readyz():
+    """
+    Return HTTP 200 OK to indicate the service is ready
+    unless caching content is older than 5 min.
+    """
+    # Check if the cache is older than 5 minutes
+    if valk.get("temperature") is None:
+        return jsonify({"ready": False, "reason": "Cache is empty"}), 503
+
+    return jsonify({"ready": True})
 
 # Middleware to track request latency
 @app.before_request
