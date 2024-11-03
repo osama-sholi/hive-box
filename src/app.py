@@ -23,9 +23,9 @@ REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request lat
 
 # Valkey configuration
 load_dotenv()
-host = os.getenv('VALKEY_HOST')
-port = int(os.getenv('VALKEY_PORT'))
 try:
+    host = os.getenv('VALKEY_HOST')
+    port = int(os.getenv('VALKEY_PORT'))
     valk = valkey.Valkey(host=host, port=port, db=0)
 except Exception as e:
     print(f"Unable to connect to Valkey: {e}")
@@ -74,7 +74,7 @@ def get_temperature():
                 valk.set("temperature", output, ex=300)
             except Exception as e:
                 print(f"Unable to cache temperature: {e}")
-                
+
             return jsonify(json.loads(output))
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
