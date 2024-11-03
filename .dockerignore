@@ -8,14 +8,12 @@ __pycache__/
 venv/
 env/
 
-# Ignore cache files
-*.pyc
-
 # Ignore test and log files
 *.log
 *.coverage
 *.pytest_cache
 .cache/
+*.pyc
 
 # Ignore environment and sensitive files
 .env
