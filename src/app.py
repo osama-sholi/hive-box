@@ -25,7 +25,10 @@ REQUEST_LATENCY = Histogram('request_latency_seconds', 'Histogram of request lat
 load_dotenv()
 host = os.getenv('VALKEY_HOST')
 port = int(os.getenv('VALKEY_PORT'))
-valk = valkey.Valkey(host=host, port=port, db=0)
+try:
+    valk = valkey.Valkey(host=host, port=port, db=0)
+except Exception as e:
+    print(f"Unable to connect to Valkey: {e}")
 
 # Version endpoint
 @app.route('/api/version', methods=['GET'])
@@ -42,10 +45,12 @@ def get_temperature():
     Return the average temperature of all boxes one hour ago
     """
     # Check if the output is in the cache
-    cached_output = valk.get("temperature")
-    if cached_output is not None:
-        # Return cached output as JSON
-        return jsonify(json.loads(cached_output))
+    try:
+        cached_output = valk.get("temperature")
+        if cached_output is not None:
+            return jsonify(json.loads(cached_output))
+    except Exception as e:
+        print(f"Unable to get cached temperature: {e}")
 
     # Retrieve and calculate temperature data if not cached
     boxes = get_boxes()
@@ -64,8 +69,12 @@ def get_temperature():
                 status = "Too Hot"
 
             output = r'{"average_temperature": ' + str(temp_avg) + r', "status": "' + status + r'"}'
-            # Add the output to the cache as a JSON string
-            valk.set("temperature", output, ex=300)
+            
+            try:
+                valk.set("temperature", output, ex=300)
+            except Exception as e:
+                print(f"Unable to cache temperature: {e}")
+                
             return jsonify(json.loads(output))
     else:
         return jsonify({"error": "Unable to get temperature"}), 500
