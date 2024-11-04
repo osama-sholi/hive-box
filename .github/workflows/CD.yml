@@ -1,16 +1,9 @@
 name: Continuous Delivery
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-    tags:
-      - "v1"
   pull_request:
     branches:
       - main
-      - dev
 
 jobs:
   build:
@@ -35,3 +28,34 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}/hive-box:${{ github.sha }}
             ghcr.io/${{ github.repository }}/hive-box:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sync Manifests to S3
+        run: |
+          aws s3 sync k8s s3://${{ secrets.S3_BUCKET_NAME }} --delete
+
+      - name: Update kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
+
+      - name: Apply Kubernetes Manifests
+        run: |
+          for file in $(aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }}/ --recursive | awk '{print $4}'); do
+            aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/$file $file
+            kubectl apply -f $file
+          done
