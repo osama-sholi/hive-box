@@ -48,7 +48,7 @@ jobs:
 
       - name: Sync Manifests to S3
         run: |
-          aws s3 sync k8s s3://${{ secrets.S3_BUCKET_NAME }} --delete --exclude "local/*"
+          aws s3 sync k8s s3://${{ secrets.S3_BUCKET_NAME }} --delete --exclude "k8s/local/*"
 
       - name: Update kubeconfig for EKS
         run: |
@@ -58,4 +58,10 @@ jobs:
         run: |
           for file in $(aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }}/ --recursive | awk '{print $4}'); do
             aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/$file - | kubectl apply -f -
+          done
+
+      - name: Rollout Deployments
+        run: |
+          for deployment in $(kubectl get deployments -o jsonpath='{.items[*].metadata.name}'); do
+            kubectl rollout restart deployment/$deployment
           done
