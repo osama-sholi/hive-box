@@ -52,7 +52,7 @@ jobs:
 
       - name: Update kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
+          aws eks update-kubeconfig --region eu-north-1 --name ${{ secrets.EKS_CLUSTER_NAME }}
 
       - name: Apply Kubernetes Manifests
         run: |
