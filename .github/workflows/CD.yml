@@ -48,7 +48,7 @@ jobs:
 
       - name: Sync Manifests to S3
         run: |
-          aws s3 sync k8s s3://${{ secrets.S3_BUCKET_NAME }} --delete --exclude "k8s/local/*"
+          aws s3 sync k8s s3://${{ secrets.S3_BUCKET_NAME }} --delete --exclude "local/*"
 
       - name: Update kubeconfig for EKS
         run: |
