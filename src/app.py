@@ -98,7 +98,7 @@ def get_readyz():
     """
     # Check if the cache is older than 5 minutes
     if valk.get("temperature") is None:
-        return jsonify({"ready": False, "reason": "Cache is empty"}), 503
+        return jsonify({"ready": False, "reason": "Cache is empty :("}), 503
 
     return jsonify({"ready": True})
 
